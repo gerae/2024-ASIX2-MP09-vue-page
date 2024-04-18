@@ -1,3 +1,4 @@
+<!-- SegundaPagina.vue -->
 <template>
   <div>
     <h1>Lista de Usuarios</h1>
@@ -10,31 +11,29 @@
 </template>
 
 <script>
-// Importa la conexión a la base de datos desde el archivo db.js
-import connection from '../stores/db.js';
-
 export default {
-    name: 'SegundaPagina',
-    data() {
-        return {
-            users: []
-        };
-    },
-    mounted() {
-        // Realiza la consulta a la base de datos al cargar el componente
-        this.fetchUsers();
-    },
-    methods: {
-        fetchUsers() {
-            // Realiza la consulta a la base de datos
-            connection.query('SELECT * FROM users', (error, results) => {
-                if (error) {
-                    console.error('Error al obtener usuarios:', error);
-                    return;
-                }
-                this.users = results; // Asigna los resultados a la propiedad 'users'
-            });
+  name: 'SegundaPagina',
+  data() {
+    return {
+      users: []
+    };
+  },
+  mounted() {
+    this.fetchUsers();
+  },
+  methods: {
+    async fetchUsers() {
+      try {
+        const response = await fetch('/api/users'); // Utiliza la ruta relativa con el prefijo '/api' configurado en el proxy
+        if (response.ok) {
+          this.users = await response.json();
+        } else {
+          console.error('Error al obtener usuarios:', response.statusText);
         }
+      } catch (error) {
+        console.error('Error al obtener usuarios:', error);
+      }
     }
+  }
 };
 </script>

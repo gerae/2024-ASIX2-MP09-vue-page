@@ -3,7 +3,7 @@ import Inicio from '../views/Inicio.vue';
 import SegundaPagina from '../views/SegundaPagina.vue';
 
 const routes = [
-  { path: '/', component: Inicio },
+  { path: '/',  component: Inicio },
   { path: '/segunda-pagina', component: SegundaPagina }
 ];
 
