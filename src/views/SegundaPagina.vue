@@ -3,7 +3,7 @@
   <div>
     <h1>Lista de Usuarios</h1>
     <ul>
-      <li v-for="user in users" :key="user.id">
+      <li v-for="user in users" :key="user.id"> <!-- Obeter datos de la tabla users -->
         {{ user.name }} - {{ user.email }}
       </li>
     </ul>
@@ -24,7 +24,7 @@ export default {
   methods: {
     async fetchUsers() {
       try {
-        const response = await fetch('/api/users'); // Utiliza la ruta relativa con el prefijo '/api' configurado en el proxy
+        const response = await fetch('/api/users'); // Obtener datos de la API
         if (response.ok) {
           this.users = await response.json();
         } else {
