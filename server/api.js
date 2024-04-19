@@ -35,6 +35,6 @@ api.get('/api/users', (req, res) => {
 });
 
 // Iniciar el servidor
-api.listen(port, () => {
-  console.log(`Servidor de API iniciado en http://localhost:${port}`);
+api.listen(process.env.API_PORT, () => {
+  console.log(`Servidor de API iniciado en http://localhost:${process.env.API_PORT}`);
 });
