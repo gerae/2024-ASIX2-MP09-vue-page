@@ -1,16 +1,17 @@
-<!-- SegundaPagina.vue -->
 <template>
   <div>
     <h1>Lista de Usuarios</h1>
     <ul>
-      <li v-for="user in users" :key="user.id"> <!-- Obeter datos de la tabla users -->
-        {{ user.name }} - {{ user.email }}
+      <li v-for="user in users" :key="user.id">
+        {{ user.name }} - {{ user.email }} - {{ user.password }}
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'SegundaPagina',
   data() {
@@ -24,12 +25,8 @@ export default {
   methods: {
     async fetchUsers() {
       try {
-        const response = await fetch('/api/users'); // Obtener datos de la API
-        if (response.ok) {
-          this.users = await response.json();
-        } else {
-          console.error('Error al obtener usuarios:', response.statusText);
-        }
+        const response = await axios.get('/api/users'); // Utilizar axios para obtener datos de la API
+        this.users = response.data; // Los datos se encuentran en response.data con axios
       } catch (error) {
         console.error('Error al obtener usuarios:', error);
       }

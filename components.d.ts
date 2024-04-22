@@ -13,8 +13,12 @@ declare module 'vue' {
     IconEcosystem: typeof import('./src/components/icons/IconEcosystem.vue')['default']
     IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
+    Login: typeof import('./src/components/login.vue')['default']
+    LoginForm: typeof import('./src/components/LoginForm.vue')['default']
     Menubar: typeof import('primevue/menubar')['default']
+    RegisterForm: typeof import('./src/components/RegisterForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Signup: typeof import('./src/components/signup.vue')['default']
   }
 }

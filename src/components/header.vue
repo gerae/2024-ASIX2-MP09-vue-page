@@ -27,6 +27,8 @@
   const items = ref([
     { label: 'Inicio', route: '/' },
     { label: 'Segunda Página', route: '/segunda-pagina' },
+    { label: 'Registro', route: '/sign-up' },
+    { label: 'Login', route: '/login' },
   ]);
   </script>
   
