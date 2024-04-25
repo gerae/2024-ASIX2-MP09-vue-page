@@ -1,14 +1,15 @@
 <template>
   <form @submit.prevent="submitForm">
     <div>
-      <label for="name">Username:</label>
-      <input type="text" id="name" v-model="name" required>
+      <label for="username">Username:</label>
+      <input type="text" id="username" v-model="username" required autocomplete="username">
     </div>
     <div>
       <label for="password">Password:</label>
       <input type="password" id="password" v-model="password" required>
     </div>
     <button type="submit">Login</button>
+    <p v-if="error" class="error-message">{{ error }}</p>
   </form>
 </template>
 
@@ -18,26 +19,25 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      name: '',
-      password: ''
+      username: '',
+      password: '',
+      error: ''
     };
-  },
-  mounted() {
-    this.submitForm();
   },
   methods: {
     async submitForm() {
       try {
-        const response = await axios
-        .get('/api/users', { 
-          name: this.name,
+        const response = await axios.post('/api/login', {
+          username: this.username,
           password: this.password
-        })
-        .then(response => {
-          console.log('Autenticación exitosa');
-        }).catch(error => {
-          console.log('Autenticación fallida', error);
         });
+        if (response.data.success) {
+          console.log("Auth correcte")
+        } else {
+          this.error = response.data.message;
+        }
+      } catch (error) {
+        this.error = 'An error occurred.';
       }
     }
   }
@@ -77,5 +77,10 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
 }
 </style>

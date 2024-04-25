@@ -3,12 +3,12 @@
 <template>
   <form @submit.prevent="submitForm">
     <div>
-      <label for="name">Name:</label>
-      <input type="text" id="name" v-model="name" required>
+      <label for="username">Name:</label>
+      <input type="text" id="username" v-model="username" required autocomplete="username">
     </div>
     <div>
       <label for="email">Email:</label>
-      <input type="email" id="email" v-model="email" required>
+      <input type="email" id="email" v-model="email" required autocomplete="email">
     </div>
     <div>
       <label for="password">Password:</label>
@@ -19,30 +19,30 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      name: '',
+      username: '',
       email: '',
       password: ''
     };
   },
   methods: {
-    submitForm() {
-      // Aquí puedes implementar la lógica para registrar al usuario
-      console.log('Name:', this.name);
-      console.log('Email:', this.email);
-      console.log('Password:', this.password);
-      
-      // Aquí puedes enviar los datos a tu servidor para el registro
-      // Por ejemplo, puedes usar axios para hacer una solicitud HTTP POST
-      // axios.post('/api/register', { name: this.name, email: this.email, password: this.password })
-      //   .then(response => {
-      //     // Manejar la respuesta del servidor
-      //   })
-      //   .catch(error => {
-      //     // Manejar errores
-      //   });
+    async submitForm() {
+      try {
+        const response = await axios.post('/api/register', {
+          username: this.username,
+          email: this.email,
+          password: this.password
+        });
+        console.log(response.data.message);
+        // Aquí puedes redirigir al usuario a la página de inicio de sesión o hacer lo que necesites después del registro exitoso
+      } catch (error) {
+        console.error('Error al registrar usuario:', error);
+        // Aquí puedes manejar los errores, por ejemplo, mostrar un mensaje de error al usuario
+      }
     }
   }
 };
