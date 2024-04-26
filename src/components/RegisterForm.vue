@@ -14,6 +14,7 @@
       <label for="password">Password:</label>
       <input type="password" id="password" v-model="password" required>
     </div>
+    <div v-if="error" class="error-message">{{ error }}</div><br>
     <button type="submit">Register</button>
   </form>
 </template>
@@ -26,7 +27,8 @@ export default {
     return {
       username: '',
       email: '',
-      password: ''
+      password: '',
+      error: ''
     };
   },
   methods: {
@@ -39,8 +41,9 @@ export default {
         });
         console.log(response.data.message);
         // Aquí puedes redirigir al usuario a la página de inicio de sesión o hacer lo que necesites después del registro exitoso
-      } catch (error) {
-        console.error('Error al registrar usuario:', error);
+      } 
+      catch (error) {
+        this.error = error.response.data.message
       }
     }
   }
@@ -81,4 +84,9 @@ button {
 button:hover {
   background-color: #218838; /* Color verde más oscuro al pasar el ratón */
 }
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
 </style>

@@ -8,6 +8,7 @@
       <label for="password">Password:</label>
       <input type="password" id="password" v-model="password" required>
     </div>
+    <div v-if="error" class="error-message">{{ error }}</div><br>
     <button type="submit">Login</button>
   </form>
 </template>
@@ -19,7 +20,8 @@ export default {
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      error: ''
     };
   },
   methods: {
@@ -29,9 +31,10 @@ export default {
           username: this.username,
           password: this.password
         });
+        document.cookie = `jwt=${response.data.jwt}; expires=${new Date(Date.now() + 86400e3).toUTCString()}; path=/`
         console.log(response.data.message);
       } catch (error) {
-        console.error('Error al iniciar session', error);
+        this.error = "Usuari o contrasenya incorrectes"
       }
     }
   }
