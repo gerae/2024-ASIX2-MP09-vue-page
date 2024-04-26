@@ -9,7 +9,6 @@
       <input type="password" id="password" v-model="password" required>
     </div>
     <button type="submit">Login</button>
-    <p v-if="error" class="error-message">{{ error }}</p>
   </form>
 </template>
 
@@ -20,8 +19,7 @@ export default {
   data() {
     return {
       username: '',
-      password: '',
-      error: ''
+      password: ''
     };
   },
   methods: {
@@ -31,13 +29,9 @@ export default {
           username: this.username,
           password: this.password
         });
-        if (response.data.success) {
-          console.log("Auth correcte")
-        } else {
-          this.error = response.data.message;
-        }
+        console.log(response.data.message);
       } catch (error) {
-        this.error = 'An error occurred.';
+        console.error('Error al iniciar session', error);
       }
     }
   }

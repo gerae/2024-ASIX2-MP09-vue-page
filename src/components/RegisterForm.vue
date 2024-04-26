@@ -41,7 +41,6 @@ export default {
         // Aquí puedes redirigir al usuario a la página de inicio de sesión o hacer lo que necesites después del registro exitoso
       } catch (error) {
         console.error('Error al registrar usuario:', error);
-        // Aquí puedes manejar los errores, por ejemplo, mostrar un mensaje de error al usuario
       }
     }
   }

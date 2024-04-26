@@ -68,8 +68,9 @@ api.post('/login', (req, res) => {
       res.status(401).json({ error: 'Contraseña incorrecta' });
       return;
     }
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
-    res.json({ message: 'Inicio de sesión exitoso', token });
+    res.json({ message: 'Usuario logeado con éxito' });
+    //const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+    //res.json({ message: 'Inicio de sesión exitoso', token });
   });
 });
 
