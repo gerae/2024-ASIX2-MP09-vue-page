@@ -22,6 +22,7 @@
 <script>
 import axios from 'axios';
 
+// Exportar datos importantes
 export default {
   data() {
     return {
@@ -31,6 +32,8 @@ export default {
       error: ''
     };
   },
+  
+  // Logica para enviar la informacion a la api
   methods: {
     async submitForm() {
       try {
@@ -51,7 +54,7 @@ export default {
 </script>
 
 <style scoped>
-/* Estilos CSS para el componente RegisterForm.vue */
+/* Estilos CSS del formulario */
 form {
   max-width: 300px;
   margin: 0 auto;

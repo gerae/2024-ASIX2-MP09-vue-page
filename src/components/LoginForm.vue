@@ -16,6 +16,7 @@
 <script>
 import axios from 'axios';
 
+// Exportar datos necessarios
 export default {
   data() {
     return {
@@ -24,6 +25,7 @@ export default {
       error: ''
     };
   },
+  // Logica para validar el login del usuario
   methods: {
     async submitForm() {
       try {
@@ -31,6 +33,7 @@ export default {
           username: this.username,
           password: this.password
         })
+        // Añadir la cookie jwt a la session del usuario
         document.cookie = `jwt=${response.data.token}; expires=${new Date(Date.now() + 86400e3).toUTCString()}; path=/`
         console.log(response.data.token);
       } catch (error) {
@@ -42,7 +45,7 @@ export default {
 </script>
 
 <style scoped>
-/* Estilos CSS para el componente LoginForm.vue */
+/* Estilos CSS del formulario */
 form {
   max-width: 300px;
   margin: 0 auto;

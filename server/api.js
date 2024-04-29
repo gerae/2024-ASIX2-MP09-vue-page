@@ -9,7 +9,7 @@ const api = express();
 
 api.use(express.json());
 
-// Buscar los datos para la conneixion
+// Obtener datos la base de datos usando dotenv
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -38,10 +38,11 @@ api.get('/users', (req, res) => {
   });
 });
 
+// Logica para obtener los datos necessarios para el registro de usuarios.
 api.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
 
-  // Verificar si el usuario ya existe
+  // Verificar si el correo electronico ya existe
   const userExistsQuery = 'SELECT * FROM users WHERE email = ?';
   connection.query(userExistsQuery, [email], async (err, results) => {
     if (err) {
@@ -54,6 +55,8 @@ api.post('/register', async (req, res) => {
       res.status(400).json({ error: 'El correo electrónico ya existe' });
       return;
     }
+
+    //Verificar si el nombre de usuario ya existe
     const userExistsQuery = 'SELECT * FROM users WHERE username = ?';
     connection.query(userExistsQuery, [username], async (err, results) => {
       if (err) {
@@ -66,6 +69,8 @@ api.post('/register', async (req, res) => {
         res.status(400).json({ error: 'El nombre de usuario ya existe' });
         return;
       }
+      
+      //Hashear la contraseña y insertar los datos del registro en la base de datos
       const hashedPassword = await bcrypt.hash(password, 10);
       const query = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
       connection.query(query, [username, email, hashedPassword], (err, results) => {
@@ -80,6 +85,7 @@ api.post('/register', async (req, res) => {
   });
 });
 
+// Logica para obtener los datos necessarios para el login de usuarios.
 api.post('/login', (req, res) => {
   const { username, password } = req.body;
   const query = 'SELECT * FROM users WHERE username = ?';
@@ -88,15 +94,50 @@ api.post('/login', (req, res) => {
       res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
       return;
     }
+
     const user = results[0];
+    // Validar que la contraseña coincide
     const passwordMatches = await bcrypt.compare(password, user.password);
     if (!passwordMatches) {
       res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
       return;
     }
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
-    //res.cookie('jwt', token, { httpOnly: true, sameSite: strict })
-    res.json({ token, user });
+    res.json({ token, user }); 
+    /* try {
+      const payload = {
+        id: user.id,
+        email: user.email,
+        createdAt: user.createdAt,
+        username: user.username
+      }; 
+      const token = jwt.sign(
+        payload, 
+        process.env.JWT_SECRET, 
+        {expiresIn: 60 * 60 * 24 * 30,},
+        (_err, token) => {
+          const serialized = serialize('token', token, {
+            httpOnly: true,
+            //secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 60 * 60 * 24 * 30,
+            path: '/',
+          });
+          res.setHeader('Set-Cookie', serialized);
+          res.json({
+            token,
+            success: true,
+            user: {
+              email: payload.email,
+              username: payload.username,
+            },
+          });
+        },
+      );
+    } catch (error) {
+      console.log(error);
+      res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+    }  */
   });
 });
 

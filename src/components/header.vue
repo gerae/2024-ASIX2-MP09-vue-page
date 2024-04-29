@@ -24,6 +24,7 @@
   
   const router = useRouter();
   
+  //Rutas a las diferentes paginas
   const items = ref([
     { label: 'Inicio', route: '/' },
     { label: 'Segunda Página', route: '/segunda-pagina' },
@@ -31,8 +32,3 @@
     { label: 'Login', route: '/login' },
   ]);
   </script>
-  
-  <style>
-  /* Estilos adicionales según sea necesario */
-  </style>
-  
