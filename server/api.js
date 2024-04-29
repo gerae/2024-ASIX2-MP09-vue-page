@@ -95,7 +95,8 @@ api.post('/login', (req, res) => {
       return;
     }
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
-    res.json({ message: 'JWT:', token });
+    //res.cookie('jwt', token, { httpOnly: true, sameSite: strict })
+    res.json({ token, user });
   });
 });
 

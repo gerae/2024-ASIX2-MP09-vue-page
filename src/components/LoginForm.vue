@@ -30,9 +30,9 @@ export default {
         const response = await axios.post('/api/login', {
           username: this.username,
           password: this.password
-        });
-        document.cookie = `jwt=${response.data.jwt}; expires=${new Date(Date.now() + 86400e3).toUTCString()}; path=/`
-        console.log(response.data.message);
+        })
+        document.cookie = `jwt=${response.data.token}; expires=${new Date(Date.now() + 86400e3).toUTCString()}; path=/`
+        console.log(response.data.token);
       } catch (error) {
         this.error = error.response.data.error
       }
