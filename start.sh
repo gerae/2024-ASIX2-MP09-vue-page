@@ -1,6 +1,7 @@
 #!/bin/bash
+sudo service mysql start
 
-read -p  "Vols crear la base de dades? (s/n)" dbcreation
+read -p  "Vols crear la base de dades? (s/N)" dbcreation
 
 case "$dbcreation" in
 	[yYsSsiyes] )

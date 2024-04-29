@@ -85,13 +85,13 @@ api.post('/login', (req, res) => {
   const query = 'SELECT * FROM users WHERE username = ?';
   connection.query(query, [username], async (err, results) => {
     if (err || results.length === 0) {
-      res.status(500).json({ error: 'Error al iniciar sesión' });
+      res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
       return;
     }
     const user = results[0];
     const passwordMatches = await bcrypt.compare(password, user.password);
     if (!passwordMatches) {
-      res.status(401).json({ error: 'Contraseña incorrecta' });
+      res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
       return;
     }
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);

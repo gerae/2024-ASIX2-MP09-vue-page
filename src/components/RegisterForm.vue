@@ -43,7 +43,7 @@ export default {
         // Aquí puedes redirigir al usuario a la página de inicio de sesión o hacer lo que necesites después del registro exitoso
       } 
       catch (error) {
-        this.error = error.response.data.message
+        this.error = error.response.data.error
       }
     }
   }

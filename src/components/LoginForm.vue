@@ -34,7 +34,7 @@ export default {
         document.cookie = `jwt=${response.data.jwt}; expires=${new Date(Date.now() + 86400e3).toUTCString()}; path=/`
         console.log(response.data.message);
       } catch (error) {
-        this.error = "Usuari o contrasenya incorrectes"
+        this.error = error.response.data.error
       }
     }
   }
