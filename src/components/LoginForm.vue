@@ -34,13 +34,16 @@ export default {
           password: this.password
         })
         // Añadir la cookie jwt a la session del usuario
-        document.cookie = `jwt=${response.data.token}; expires=${new Date(Date.now() + 86400e3).toUTCString()}; path=/`
-        console.log(response.data.token);
+        document.cookie = `jwt=${response.data.token}`
+        this.$store.commit('setAuthentication', true);
+        // Redireccionar a la url solicitada
+        this.$router.replace(this.$route.query.from);
       } catch (error) {
         this.error = error.response.data.error
+        console.log(error)
       }
     }
-  }
+  } 
 };
 </script>
 

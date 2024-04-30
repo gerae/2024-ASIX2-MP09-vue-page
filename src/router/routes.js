@@ -3,6 +3,7 @@ import Inicio from '../views/Inicio.vue';
 import SegundaPagina from '../views/SegundaPagina.vue';
 import Register from '../views/RegisterView.vue';
 import Login from '../views/LoginView.vue';
+import store from '../store/store.js';
 
 const routes = [
   { path: '/',  component: Inicio },
@@ -16,12 +17,11 @@ const router = createRouter({
   routes
 });
 
-// Agrega este bloque de código
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // Comprueba si el usuario está autenticado
-    if (!document.cookie.includes('jwt')) {
-      next({ path: '/login' });
+    if (!store.state.isAuthenticated) { // Utiliza el estado de Vuex en lugar de comprobar la cookie
+      next({ path: '/login', query: { from: to.path} });
     } else {
       next();
     }

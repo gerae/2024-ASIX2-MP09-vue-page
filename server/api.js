@@ -95,15 +95,39 @@ api.post('/login', (req, res) => {
       return;
     }
 
-    const user = results[0];
+    const user = results[0]
     // Validar que la contraseña coincide
     const passwordMatches = await bcrypt.compare(password, user.password);
     if (!passwordMatches) {
       res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
       return;
     }
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
-    res.json({ token, user }); 
+    try {
+      const payload = {
+        id: user.id,
+        email: user.email,
+        created_at: user.created_at,
+        username: user.username
+      }; 
+      const token = jwt.sign(
+        payload, 
+        process.env.JWT_SECRET,
+      );
+      res.json({
+        token,
+        success: true,
+        user: {
+          email: payload.email,
+          username: payload.username,
+        },
+      });
+    } 
+    catch (error) {
+      console.log(error);
+      res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+    }
+
+    // En un entorno real, se tendria que usar una configuracion parecida a esta, al trabajar en localhost no funciona correctamente.
     /* try {
       const payload = {
         id: user.id,
