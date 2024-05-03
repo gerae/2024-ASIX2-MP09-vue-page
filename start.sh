@@ -46,4 +46,5 @@ EOF
 esac
 
 # Iniciar el servidor vite i api
+npm install
 npm run dev
