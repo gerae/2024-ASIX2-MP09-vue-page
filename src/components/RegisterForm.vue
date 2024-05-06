@@ -10,16 +10,17 @@
       <label for="email">Email:</label>
       <input type="email" id="email" v-model="email" required autocomplete="email">
     </div>
-    <div>
+    <FloatLabel>
       <label for="password">Password:</label>
-      <input type="password" id="password" v-model="password" required>
-    </div>
+      <password v-model="value" :feedback="false"/>
+    </FloatLabel>
     <div v-if="error" class="error-message">{{ error }}</div><br>
     <button type="submit">Register</button>
   </form>
 </template>
 
 <script>
+
 import axios from 'axios';
 
 // Exportar datos importantes
@@ -43,9 +44,8 @@ export default {
           password: this.password
         });
         console.log(response.data.message);
-        // Aquí puedes redirigir al usuario a la página de inicio de sesión o hacer lo que necesites después del registro exitoso
-      } 
-      catch (error) {
+        window.location.href = '/';
+      } catch (error) {
         this.error = error.response.data.error
       }
     }

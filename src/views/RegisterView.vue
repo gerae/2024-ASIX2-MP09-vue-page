@@ -18,7 +18,6 @@
   </script>
   
   <style scoped>
-  /* Estilos CSS para la vista RegisterView.vue */
   h1 {
     text-align: center;
   }

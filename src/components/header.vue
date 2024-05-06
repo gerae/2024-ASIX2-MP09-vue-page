@@ -30,5 +30,6 @@
     { label: 'Segunda Página', route: '/segunda-pagina' },
     { label: 'Registro', route: '/sign-up' },
     { label: 'Login', route: '/login' },
+    { label: 'UserProfile', route: '/profile' },
   ]);
   </script>
