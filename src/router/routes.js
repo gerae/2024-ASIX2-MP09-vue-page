@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Inicio from '../views/Inicio.vue';
-import SegundaPagina from '../views/SegundaPagina.vue';
+import SegundaPagina from '../views/crud.vue';
 import Register from '../views/RegisterView.vue';
 import Login from '../views/LoginView.vue';
 import store from '../store/store.js';
