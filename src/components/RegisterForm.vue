@@ -10,17 +10,29 @@
       <label for="email">Email:</label>
       <InputText type="email" id="email" v-model="email" required autocomplete="email" placeholder="Email"/>
     </div>
-    <FloatLabel>
+    <div>
       <label for="password">Password:</label>
-      <input type="password" id="password" v-model="password" required>
+      <Password type="password" id="password" v-model="password" required toggle-mask placeholder="Password">
+        <template #footer>
+          <Divider />
+          <p class="mt-2">Suggestions</p>
+          <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+            <li>At least one lowercase</li>
+            <li>At least one uppercase</li>
+            <li>At least one numeric</li>
+            <li>Minimum 8 characters</li>
+          </ul>
+        </template>
+      </Password>
     </div>
->>>>>>> 0a094c44943f4deb59e705e1da5f96003fdef64e
     <div v-if="error" class="error-message">{{ error }}</div><br>
     <Button type="submit" label="Register"/>
   </form>
 </template>
 
 <script>
+import Password from 'primevue/password';
+import router from '../router/routes'
 import axios from 'axios';
 import InputText from 'primevue/inputtext';
 
@@ -45,13 +57,14 @@ export default {
           password: this.password
         });
         console.log(response.data.message);
-        // Aquí puedes redirigir al usuario a la página de inicio de sesión o hacer lo que necesites después del registro exitoso
+        router.push('/');
       } 
       catch (error) {
         this.error = error.response.data.error
       }
     }
-  }
+  },
+  components: { Password, InputText }
 };
 </script>
 
