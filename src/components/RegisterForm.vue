@@ -12,22 +12,7 @@
     </div>
     <FloatLabel>
       <label for="password">Password:</label>
-<<<<<<< HEAD
-      <password v-model="value" :feedback="false"/>
-    </FloatLabel>
-=======
-      <Password type="password" id="password" v-model="password" required toggle-mask placeholder="Password">
-        <template #footer>
-          <Divider />
-          <p class="mt-2">Suggestions</p>
-          <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
-            <li>At least one lowercase</li>
-            <li>At least one uppercase</li>
-            <li>At least one numeric</li>
-            <li>Minimum 8 characters</li>
-          </ul>
-        </template>
-      </Password>
+      <input type="password" id="password" v-model="password" required>
     </div>
 >>>>>>> 0a094c44943f4deb59e705e1da5f96003fdef64e
     <div v-if="error" class="error-message">{{ error }}</div><br>
@@ -36,18 +21,11 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-
-=======
-import Password from 'primevue/password';
-import router from '../router/routes'
->>>>>>> 0a094c44943f4deb59e705e1da5f96003fdef64e
 import axios from 'axios';
 import InputText from 'primevue/inputtext';
 
 // Exportar datos importantes
 export default {
-<<<<<<< HEAD
   data() {
     return {
       username: '',
@@ -67,40 +45,13 @@ export default {
           password: this.password
         });
         console.log(response.data.message);
-        window.location.href = '/';
-      } catch (error) {
+        // Aquí puedes redirigir al usuario a la página de inicio de sesión o hacer lo que necesites después del registro exitoso
+      } 
+      catch (error) {
         this.error = error.response.data.error
       }
     }
   }
-=======
-    data() {
-        return {
-            username: '',
-            email: '',
-            password: '',
-            error: ''
-        };
-    },
-    // Logica para enviar la informacion a la api
-    methods: {
-        async submitForm() {
-            try {
-                const response = await axios.post('/api/register', {
-                    username: this.username,
-                    email: this.email,
-                    password: this.password
-                });
-                console.log(response.data.message);
-                router.push('/');
-            }
-            catch (error) {
-                this.error = error.response.data.error;
-            }
-        }
-    },
-    components: { Password, InputText }
->>>>>>> 0a094c44943f4deb59e705e1da5f96003fdef64e
 };
 </script>
 

@@ -26,13 +26,4 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-<<<<<<< HEAD
-#.env
-=======
-<<<<<<< HEAD
-.env
-=======
-#.env
->>>>>>> 086171284da4dbe749308476f264505950a6cbbc
->>>>>>> 0a094c44943f4deb59e705e1da5f96003fdef64e
 *.tsbuildinfo
