@@ -3,28 +3,51 @@
 <template>
   <form @submit.prevent="submitForm">
     <div>
-      <label for="username">Name:</label>
-      <input type="text" id="username" v-model="username" required autocomplete="username">
+      <label for="username">Username</label>
+      <InputText type="username" id="username" v-model="username" required autocomplete="username" placeholder="Username"/>
     </div>
     <div>
       <label for="email">Email:</label>
-      <input type="email" id="email" v-model="email" required autocomplete="email">
+      <InputText type="email" id="email" v-model="email" required autocomplete="email" placeholder="Email"/>
     </div>
     <FloatLabel>
       <label for="password">Password:</label>
+<<<<<<< HEAD
       <password v-model="value" :feedback="false"/>
     </FloatLabel>
+=======
+      <Password type="password" id="password" v-model="password" required toggle-mask placeholder="Password">
+        <template #footer>
+          <Divider />
+          <p class="mt-2">Suggestions</p>
+          <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+            <li>At least one lowercase</li>
+            <li>At least one uppercase</li>
+            <li>At least one numeric</li>
+            <li>Minimum 8 characters</li>
+          </ul>
+        </template>
+      </Password>
+    </div>
+>>>>>>> 0a094c44943f4deb59e705e1da5f96003fdef64e
     <div v-if="error" class="error-message">{{ error }}</div><br>
-    <button type="submit">Register</button>
+    <Button type="submit" label="Register"/>
   </form>
 </template>
 
 <script>
+<<<<<<< HEAD
 
+=======
+import Password from 'primevue/password';
+import router from '../router/routes'
+>>>>>>> 0a094c44943f4deb59e705e1da5f96003fdef64e
 import axios from 'axios';
+import InputText from 'primevue/inputtext';
 
 // Exportar datos importantes
 export default {
+<<<<<<< HEAD
   data() {
     return {
       username: '',
@@ -50,6 +73,34 @@ export default {
       }
     }
   }
+=======
+    data() {
+        return {
+            username: '',
+            email: '',
+            password: '',
+            error: ''
+        };
+    },
+    // Logica para enviar la informacion a la api
+    methods: {
+        async submitForm() {
+            try {
+                const response = await axios.post('/api/register', {
+                    username: this.username,
+                    email: this.email,
+                    password: this.password
+                });
+                console.log(response.data.message);
+                router.push('/');
+            }
+            catch (error) {
+                this.error = error.response.data.error;
+            }
+        }
+    },
+    components: { Password, InputText }
+>>>>>>> 0a094c44943f4deb59e705e1da5f96003fdef64e
 };
 </script>
 
