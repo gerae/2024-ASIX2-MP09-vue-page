@@ -1,5 +1,4 @@
 <!-- components/RegisterForm.vue -->
-
 <template>
   <form @submit.prevent="submitForm">
     <div>
