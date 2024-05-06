@@ -1,11 +1,6 @@
 <template>
     <div>
-      <h1>Lista de Usuarios</h1>
-      <ul>
-        <li v-for="user in users" :key="user.id">
-          {{ user.id }} - {{ user.username }} - {{ user.email }} - {{ user.password }}
-        </li>
-      </ul>
+      <h1>USER Profile</h1>
     </div>
 </template>
   
