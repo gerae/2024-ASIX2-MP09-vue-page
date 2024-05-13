@@ -23,6 +23,21 @@ connection.connect(err => {
     return;
   }
   console.log('Conexión a la base de datos MySQL establecida');
+  const hashedPassword = bcrypt.hashSync('admin', 10);
+
+  // Insertar el usuario en la base de datos
+  const user = {
+    username: 'admin',
+    email: 'admin@admin.com',
+    password: hashedPassword,
+  }
+  connection.query(`INSERT INTO ${process.env.DB_DATABASE}.${process.env.DB_TABLE} SET ?`, user, (error, results) => {
+    if (error) {
+      console.error('Error al insertar el usuario:', error);
+    } else {
+      console.log(`Usuario insertado correctamente\nCredencials: admin:admin`);
+    }
+  });
 });
 
 // Query para obtener la tabla users.

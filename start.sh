@@ -36,8 +36,6 @@ case "$dbcreation" in
 	    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	    PRIMARY KEY (id)
 	);
-
-	INSERT INTO users (username, email, password) VALUES ('admin', 'admin@example.com', 'admin');
 EOF
 	;;
 	[nNnoNO] ) 
