@@ -18,19 +18,31 @@
         </Menubar>
     </div>
   </template>
-  
-  <script setup>
-  import { ref } from 'vue';
-  import { useRouter } from 'vue-router';
-  
-  const router = useRouter();
-  
-  //Rutas a las diferentes paginas
-  const items = ref([
-    { label: 'Inicio', route: '/' },
-    { label: 'Segunda Página', route: '/segunda-pagina' },
-    { label: 'Registro', route: '/sign-up' },
-    { label: 'Login', route: '/login' },
-    { label: 'UserProfile', route: '/profile' },
-  ]);
-  </script>
+
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+//Rutas a las diferentes paginas
+const items = ref([
+  { label: 'Inicio', route: '/' },
+  { label: 'Segunda Página', route: '/segunda-pagina' },
+  { label: 'Registro', route: '/sign-up' },
+  { label: 'Login', route: '/login' },
+  {
+      label: 'profile',
+      items: [
+          {
+              label: 'Perfil',
+              route: '/profile'
+          },
+          {
+              label: 'Logout',
+              route: '/logout'
+          }
+      ]
+  },
+]);
+</script>
