@@ -35,7 +35,7 @@ connection.connect(err => {
     if (error) {
       console.error('Error al insertar el usuario:', error);
     } else {
-      console.log(`Usuario insertado correctamente\nCredencials: admin:admin`);
+      console.log(`Usuario admin insertado correctamente\nCredenciales: admin:admin`);
     }
   });
 });
