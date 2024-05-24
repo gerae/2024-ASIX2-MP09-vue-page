@@ -7,7 +7,7 @@ case "$dbcreation" in
 	[yYsSsiyes] )
 	echo "ok, creare la base de dades de nou"
 	echo "Contrasenya de l'usuari root de MySQL"
-	mysql -u root -proot -vv <<EOF || { echo ""; exit 1; }
+	sudo mysql -u root -proot -vv <<EOF || { echo ""; exit 1; }
 
 	## Comprobar si existeix la base de dades vueproject y eliminar-la
 	DROP DATABASE IF EXISTS vueproject;
@@ -23,6 +23,7 @@ case "$dbcreation" in
 
 	## Afegir l'usuari gerard amb contrasenya gerard y tots els permisos a la base de dades vueproject
 	CREATE USER 'gerard'@'localhost' IDENTIFIED WITH mysql_native_password BY 'gerard';
+
 	GRANT ALL PRIVILEGES ON vueproject.* TO 'gerard'@'localhost';
 	flush privileges;
 
