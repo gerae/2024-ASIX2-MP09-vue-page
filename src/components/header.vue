@@ -3,7 +3,6 @@
       <!-- Header -->
       <div class="fixed-top">
         <div class="header-container">
-          <img src="../assets/logo.png" alt="Logo" class="logo" />
           <Menubar :model="items" class="p-menubar">
             <template #item="{ item, props, hasSubmenu }">
               <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
@@ -33,12 +32,12 @@
   
   // Rutas a las diferentes páginas
   const items = ref([
-    { label: 'Inicio', route: '/' },
-    { label: 'Segunda Página', route: '/segunda-pagina' },
+    { label: 'Home', route: '/' },
+    { label: 'Clasificación', route: '/users-table' },
     { label: 'Registro', route: '/sign-up' },
-    { label: 'Login', route: '/login' },
+    { label: 'Iniciar session', route: '/login' },
     {
-      label: 'profile',
+      label: 'Perfil',
       items: [
         { label: 'Perfil', route: '/profile' },
         { label: 'Logout', route: '/logout' }
@@ -50,7 +49,6 @@
   <style>
   .p-menubar {
     border-radius: 0;
-    border: 0;
   }
   
   /* Estilos para fijar el header en la parte superior */
@@ -65,24 +63,11 @@
   
   /* Estilos del contenedor del header */
   .header-container {
-    display: flex; /* Para alinear los elementos en línea */
     align-items: center; /* Para alinear verticalmente */
-    background-color: transparent; /* Fondo transparente */
     padding: 0; /* Sin relleno */
     border-radius: 0;
   }
   
   /* Estilos para los enlaces del menú */
-  .nav-link {
-    background-color: transparent; /* Fondo transparente */
-    margin-left: 0px;
-  }
-  
-  /* Estilos para el logo */
-  .logo {
-    width: 80px; /* Ajusta el ancho según sea necesario */
-    height: auto; /* Mantiene la proporción de aspecto */
-    margin-right: 10px; /* Espacio entre el logo y el menú */
-  }
   </style>
   

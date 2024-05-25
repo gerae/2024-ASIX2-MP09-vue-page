@@ -14,28 +14,44 @@ const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE
+  database: process.env.DB_DATABASE,
 });
 
-connection.connect(err => {
+connection.connect((err) => {
   if (err) {
-    console.error('Error al conectar a la base de datos:', err);
+    console.error('Error conectando a la base de datos:', err);
     return;
   }
-  console.log('Conexión a la base de datos MySQL establecida');
-  const hashedPassword = bcrypt.hashSync('admin', 10);
+  console.log('Conectado a la base de datos.');
 
-  // Insertar el usuario en la base de datos
-  const user = {
-    username: 'admin',
-    email: 'admin@admin.com',
-    password: hashedPassword,
-  }
-  connection.query(`INSERT INTO ${process.env.DB_DATABASE}.${process.env.DB_TABLE} SET ?`, user, (error, results) => {
+  const username = 'admin';
+  const email = 'admin@admin.com';
+  const password = 'admin'; // Tu contraseña original
+  const hashedPassword = bcrypt.hashSync(password, 10);
+
+  // Comprobar si el usuario ya existe
+  connection.query(`SELECT * FROM ${process.env.DB_DATABASE}.${process.env.DB_TABLE} WHERE username = ? OR email = ?`, [username, email], (error, results) => {
     if (error) {
-      console.error('Error al insertar el usuario:', error);
+      console.error('Error al verificar el usuario:', error);
+      return;
+    }
+
+    if (results.length > 0) {
+      console.log('El usuario ya existe.');
     } else {
-      console.log(`Usuario admin insertado correctamente\nCredenciales: admin:admin`);
+      // Insertar el usuario en la base de datos
+      const user = {
+        username: username,
+        email: email,
+        password: hashedPassword,
+      };
+      connection.query(`INSERT INTO ${process.env.DB_DATABASE}.${process.env.DB_TABLE} SET ?`, user, (error, results) => {
+        if (error) {
+          console.error('Error al insertar el usuario:', error);
+        } else {
+          console.log(`Usuario admin insertado correctamente\nCredenciales: admin:admin`);
+        }
+      });
     }
   });
 });

@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Inicio from '../views/Inicio.vue';
-import SegundaPagina from '../views/crud.vue';
+import Home from '../views/home.vue';
+import users_table from '../views/crud.vue';
 import Register from '../views/RegisterView.vue';
 import Login from '../views/LoginView.vue';
 import store from '../store/store.js';
 import UserProfile from '../components/UserProfile.vue';
 
 const routes = [
-  { path: '/',  component: Inicio },
-  { path: '/segunda-pagina', component: SegundaPagina, meta: { requiresAuth: true } },
+  { path: '/',  component: Home },
+  { path: '/users-table', component: users_table, meta: { requiresAuth: true } },
   { path: '/sign-up', component: Register },
   { path: '/login', component: Login },
   { path: '/profile', component: UserProfile, meta: { requiresAuth: true } },
@@ -19,7 +19,7 @@ const router = createRouter({
   routes
 });
 
-router.beforeEach((to, from, next) => {
+/* router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // Comprueba si el usuario está autenticado
     if (!store.state.isAuthenticated) { // Utiliza el estado de Vuex en lugar de comprobar la cookie
@@ -30,6 +30,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
-});
+}); */
 
 export default router;
