@@ -1,7 +1,5 @@
 <template>
-    <div>
-      <!-- Header -->
-      <div class="fixed-top">
+      <div>
         <div class="header-container">
           <Menubar :model="items" class="p-menubar">
             <template #item="{ item, props, hasSubmenu }">
@@ -20,8 +18,6 @@
           </Menubar>
         </div>
       </div>
-      <!-- Main content -->
-    </div>
   </template>
   
   <script setup>
@@ -48,17 +44,14 @@
   
   <style>
   .p-menubar {
-    border-radius: 0;
-  }
-  
-  /* Estilos para fijar el header en la parte superior */
-  .fixed-top {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    z-index: 1000;
     width: 100%;
+    height: 72px;
+    z-index: 1000; /* Asegura que el header esté por encima del contenido */
+    border-radius: 0;
+    background-color: rgba(255, 0, 0, 0.144);
   }
   
   /* Estilos del contenedor del header */

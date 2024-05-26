@@ -5,6 +5,7 @@
       <h1>Login</h1>
       <LoginForm />
     </div>
+    <br>
   </template>
   
   <script>

@@ -23,11 +23,12 @@ connection.connect((err) => {
     return;
   }
   console.log('Conectado a la base de datos.');
-
+  
   const username = 'admin';
   const email = 'admin@admin.com';
   const password = 'admin'; // Tu contraseña original
   const hashedPassword = bcrypt.hashSync(password, 10);
+  const points = 9999999;
 
   // Comprobar si el usuario ya existe
   connection.query(`SELECT * FROM ${process.env.DB_DATABASE}.${process.env.DB_TABLE} WHERE username = ? OR email = ?`, [username, email], (error, results) => {
@@ -37,19 +38,20 @@ connection.connect((err) => {
     }
 
     if (results.length > 0) {
-      console.log('El usuario ya existe.');
+      console.log('Credenciales: admin:admin');
     } else {
       // Insertar el usuario en la base de datos
       const user = {
         username: username,
         email: email,
         password: hashedPassword,
+        points: points,
       };
       connection.query(`INSERT INTO ${process.env.DB_DATABASE}.${process.env.DB_TABLE} SET ?`, user, (error, results) => {
         if (error) {
           console.error('Error al insertar el usuario:', error);
         } else {
-          console.log(`Usuario admin insertado correctamente\nCredenciales: admin:admin`);
+          console.log(`Credenciales: admin:admin`);
         }
       });
     }

@@ -1,4 +1,6 @@
 #!/bin/bash
+sudo apt-get install faker -y
+pip install --upgrade faker
 sudo service mysql start
 
 read -p  "Vols crear la base de dades? (s/N)" dbcreation
@@ -33,10 +35,16 @@ case "$dbcreation" in
 	    username VARCHAR(255) NOT NULL,
 	    email VARCHAR(255) NOT NULL,
 	    password VARCHAR(255) NOT NULL,
+	    points INT DEFAULT 0,
 	    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	    PRIMARY KEY (id)
 	);
+
+	INSERT INTO users (username, email, password, points, created_at, updated_at) VALUES
+    	$(for i in {1..15}; do
+        	echo "('"$(faker user_name)"', '"$(faker email)"', '"$(faker password)"', $((RANDOM % 1001)), NOW(), NOW())"
+    	done | paste -sd ',' -);
 EOF
 	;;
 	[nNnoNO] ) 
