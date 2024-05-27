@@ -34,7 +34,7 @@ import Password from 'primevue/password';
 import router from '../router/routes'
 import axios from 'axios';
 import InputText from 'primevue/inputtext';
-
+  
 // Exportar datos importantes
 export default {
   data() {
