@@ -1,29 +1,4 @@
 # gmoreno-vue-project
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+El script start.sh creara la base de dades i iniciara el server per a poder visualitzar la pagina, ames generara registres aleatoris, instal·lara alguns paquets.
+El usuari per accedir a mysql es root amb contrasenya root. Despres es crea un usuari especific per a la base de dades
