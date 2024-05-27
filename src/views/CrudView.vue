@@ -1,6 +1,7 @@
 <template>
   <div>
     <div id="page-container">
+      <br>
       <h1>Clasificacion</h1>
       <InputText v-model="searchText" placeholder="Buscar jugador"/>
       <DataTable :value="filteredUsers" stripedRows tableStyle="min-width: 50rem">
@@ -10,7 +11,7 @@
       </DataTable>
     </div>
   </div>
-</template>
+</template> 
 
 <script>
 import axios from 'axios';

@@ -1,23 +1,21 @@
 <template>
   <form @submit.prevent="submitForm">
     <div>
-      <label for="username">Username:</label>
+      <label for="username">Nombre de usuario:</label>
       <input type="text" id="username" v-model="username" required autocomplete="username">
     </div>
     <div>
-      <label for="password">Password:</label>
+      <label for="password">Contraseña:</label>
       <input type="password" id="password" v-model="password" required>
     </div>
     <div v-if="error" class="error-message">{{ error }}</div><br>
-    <button type="submit">Login</button>
+    <Button type="submit">Iniciar sessión</Button>
   </form>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios';  
 
-
-// Exportar datos necessarios
 export default {
   data() {
     return {
@@ -26,7 +24,7 @@ export default {
       error: ''
     };
   },
-  // Logica para validar el login del usuario
+  // Validar dades form
   methods: {
     async submitForm() {
       try {
@@ -34,12 +32,12 @@ export default {
           username: this.username,
           password: this.password
         })
-        // Añadir la cookie jwt a la session del usuario
+        // Afegir cookie
         document.cookie = `jwt=${response.data.token}`
         localStorage.setItem('localjwt',response.data.token);
         this.$store.commit('setAuthentication', true);
-        // Redireccionar a la url solicitada
-        this.$router.replace(this.$route.query.from);
+        router.push('/');
+        // Moure a la pagina solicitada en cas de utilitzar "requierauth" this.$router.replace(this.$route.query.from);
       } catch (error) {
         this.error = error.response.data.error
         console.log(error)
@@ -50,7 +48,6 @@ export default {
 </script>
 
 <style scoped>
-/* Estilos CSS del formulario */
 form {
   max-width: 300px;
   margin: 0 auto;

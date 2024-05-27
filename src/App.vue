@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-      <main style="margin-top: 72px;">
+      <main>
         <router-view />
       </main>
     <Footer />
@@ -28,7 +28,13 @@ export default {
   margin-left: 0px;
 }
 
+main {
+  margin-top: 72px;
+}
+
 body {
   padding: 0px;
+  min-height: auto;
+  min-width: auto;
 }
 </style>

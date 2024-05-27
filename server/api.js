@@ -26,11 +26,11 @@ connection.connect((err) => {
   
   const username = 'admin';
   const email = 'admin@admin.com';
-  const password = 'admin'; // Tu contraseña original
+  const password = 'admin';
   const hashedPassword = bcrypt.hashSync(password, 10);
   const points = 9999999;
 
-  // Comprobar si el usuario ya existe
+  // Comprobar si l'usuari existeix
   connection.query(`SELECT * FROM ${process.env.DB_DATABASE}.${process.env.DB_TABLE} WHERE username = ? OR email = ?`, [username, email], (error, results) => {
     if (error) {
       console.error('Error al verificar el usuario:', error);
@@ -40,7 +40,7 @@ connection.connect((err) => {
     if (results.length > 0) {
       console.log('Credenciales: admin:admin');
     } else {
-      // Insertar el usuario en la base de datos
+      // Insertar a l'usuari administrador
       const user = {
         username: username,
         email: email,
@@ -58,7 +58,7 @@ connection.connect((err) => {
   });
 });
 
-// Query para obtener la tabla users.
+// Query per a obtenir les dades de la taula "users"
 api.get('/users', (req, res) => {
   const query = 'SELECT * FROM users';
   connection.query(query, (err, results) => {
@@ -71,11 +71,11 @@ api.get('/users', (req, res) => {
   });
 });
 
-// Logica para obtener los datos necessarios para el registro de usuarios.
+// Logica per al registre 
 api.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
 
-  // Verificar si el correo electronico ya existe
+  // Comprovar si el correu electronic existeix
   const userExistsQuery = 'SELECT * FROM users WHERE email = ?';
   connection.query(userExistsQuery, [email], async (err, results) => {
     if (err) {
@@ -89,7 +89,7 @@ api.post('/register', async (req, res) => {
       return;
     }
 
-    //Verificar si el nombre de usuario ya existe
+    // Comprovar si el nom d'usuari existeix
     const userExistsQuery = 'SELECT * FROM users WHERE username = ?';
     connection.query(userExistsQuery, [username], async (err, results) => {
       if (err) {
@@ -103,7 +103,7 @@ api.post('/register', async (req, res) => {
         return;
       }
       
-      //Hashear la contraseña y insertar los datos del registro en la base de datos
+      //Hashear la contrasenya i insertar l'usuari
       const hashedPassword = await bcrypt.hash(password, 10);
       const query = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
       connection.query(query, [username, email, hashedPassword], (err, results) => {
@@ -118,7 +118,7 @@ api.post('/register', async (req, res) => {
   });
 });
 
-// Logica para obtener los datos necessarios para el login de usuarios.
+// Logica per al login
 api.post('/login', (req, res) => {
   const { username, password } = req.body;
   const query = 'SELECT * FROM users WHERE username = ?';
@@ -129,7 +129,7 @@ api.post('/login', (req, res) => {
     }
 
     const user = results[0]
-    // Validar que la contraseña coincide
+    // Comprovar la contrasenya es correcta
     const passwordMatches = await bcrypt.compare(password, user.password);
     if (!passwordMatches) {
       res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
@@ -160,41 +160,42 @@ api.post('/login', (req, res) => {
       res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
     }
 
-    // En un entorno real, se tendria que usar una configuracion parecida a esta, al trabajar en localhost no funciona correctamente.
-    /* try {
-      const payload = {
-        id: user.id,
-        email: user.email,
-        createdAt: user.createdAt,
-        username: user.username
-      }; 
-      const token = jwt.sign(
-        payload, 
-        process.env.JWT_SECRET, 
-        {expiresIn: 60 * 60 * 24 * 30,},
-        (_err, token) => {
-          const serialized = serialize('token', token, {
-            httpOnly: true,
-            //secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
-            maxAge: 60 * 60 * 24 * 30,
-            path: '/',
-          });
-          res.setHeader('Set-Cookie', serialized);
-          res.json({
-            token,
-            success: true,
-            user: {
-              email: payload.email,
-              username: payload.username,
-            },
-          });
-        },
-      );
-    } catch (error) {
-      console.log(error);
-      res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
-    }  */
+       // En un entorn real, utilitzaria aixo, al utilitzar localhost no funciona del tot bé.
+   /* try {
+     const payload = {
+       id: user.id,
+       email: user.email,
+       createdAt: user.createdAt,
+       username: user.username
+     };
+     const token = jwt.sign(
+       payload,
+       process.env.JWT_SECRET,
+       {expiresIn: 60 * 60 * 24 * 30,},
+       (_err, token) => {
+         const serialized = serialize('token', token, {
+           httpOnly: true,
+           //secure: process.env.NODE_ENV === 'production',
+           sameSite: 'strict',
+           maxAge: 60 * 60 * 24 * 30,
+           path: '/',
+         });
+         res.setHeader('Set-Cookie', serialized);
+         res.json({
+           token,
+           success: true,
+           user: {
+             email: payload.email,
+             username: payload.username,
+           },
+         });
+       },
+     );
+   } catch (error) {
+     console.log(error);
+     res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+   }  */
+
   });
 });
 

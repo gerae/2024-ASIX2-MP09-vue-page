@@ -2,31 +2,31 @@
 <template>
   <form @submit.prevent="submitForm">
     <div>
-      <label for="username">Username</label>
-      <InputText type="username" id="username" v-model="username" required autocomplete="username" placeholder="Username"/>
+      <label for="username">Nombre de usuario:</label>
+      <InputText type="username" id="username" v-model="username" required autocomplete="username" placeholder="Nombre de usuario"/>
     </div>
     <div>
       <label for="email">Email:</label>
       <InputText type="email" id="email" v-model="email" required autocomplete="email" placeholder="Email"/>
     </div>
     <div>
-      <label for="password">Password:</label>
-      <Password type="password" id="password" v-model="password" required toggle-mask placeholder="Password">
+      <label for="password">Contraseña:</label>
+      <Password type="password" id="password" v-model="password" required toggle-mask placeholder="Contraseña">
         <template #footer>
           <Divider />
-          <p class="mt-2">Suggestions</p>
+          <p class="mt-2">Sugerencias</p>
           <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
-            <li>At least one lowercase</li>
-            <li>At least one uppercase</li>
-            <li>At least one numeric</li>
-            <li>Minimum 8 characters</li>
+            <li>Minimo 1 minuscula</li>
+            <li>Minimo 1 mayuscula</li>
+            <li>Minimo 1 numero o caracter especial</li>
+            <li>Minimo 8 caracteres</li>
           </ul>
         </template>
       </Password>
     </div>
     <div v-if="error" class="error-message">{{ error }}</div><br>
     <Button type="submit" label="Register"/>
-  </form>
+  </form> 
 </template>
 
 <script>

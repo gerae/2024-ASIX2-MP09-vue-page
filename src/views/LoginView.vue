@@ -2,6 +2,7 @@
 
 <template>
     <div>
+      <br>
       <h1>Login</h1>
       <LoginForm />
     </div>

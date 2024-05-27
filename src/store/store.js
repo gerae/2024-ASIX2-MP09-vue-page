@@ -10,4 +10,4 @@ export default createStore({
       state.isAuthenticated = status;
     },
   },
-});
+}); 

@@ -1,7 +1,7 @@
 <!-- views/UserProfileView.vue -->
 <template>
     <div>
-      <UserProfileForm/>
+      <p>En construccion</p>
     </div>
   </template>
   

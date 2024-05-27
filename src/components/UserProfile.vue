@@ -1,14 +1,15 @@
 <template>
-    <div>
-      <h1>USER Profile</h1>
-    </div>
+  <div>
+    <br>
+    <h1>En construccion</h1>
+  </div>
 </template>
   
 <script>
   import axios from 'axios';
 
   export default {
-    name: 'SegundaPagina',
+    name: 'Perfil',
     data() {
       return {
         users: []

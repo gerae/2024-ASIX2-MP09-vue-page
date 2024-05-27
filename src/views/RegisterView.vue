@@ -2,6 +2,7 @@
 
 <template>
     <div>
+      <br>
       <h1>Register</h1>
       <RegisterForm />
     </div>

@@ -5,12 +5,12 @@ import Register from '../views/RegisterView.vue';
 import Login from '../views/LoginView.vue';
 import UserProfile from '../components/UserProfile.vue';
 
-const routes = [
+const routes = [ //Per a activar pagines nomes tinguin acces despres de haber iniciat sessió "meta: { requiresAuth: true }"
   { path: '/',  component: Home },
-  { path: '/users-table', component: users_table, meta: { requiresAuth: true } },
+  { path: '/users-table', component: users_table},
   { path: '/sign-up', component: Register },
   { path: '/login', component: Login },
-  { path: '/profile', component: UserProfile, meta: { requiresAuth: true } },
+  { path: '/profile', component: UserProfile,},
 ];
 
 const router = createRouter({
@@ -18,10 +18,14 @@ const router = createRouter({
   routes
 });
 
-/* router.beforeEach((to, from, next) => {
+/* 
+
+Logica que utilitza un store per a nomes permetre acces a aquells usuaris que han iniciat sessió
+
+router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // Comprueba si el usuario está autenticado
-    if (!store.state.isAuthenticated) { // Utiliza el estado de Vuex en lugar de comprobar la cookie
+    if (!store.state.isAuthenticated) {
       next({ path: '/login', query: { from: to.path} });
     } else {
       next();
@@ -29,6 +33,8 @@ const router = createRouter({
   } else {
     next();
   }
-}); */
+}); 
+
+*/
 
 export default router;

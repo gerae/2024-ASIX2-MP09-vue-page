@@ -124,29 +124,42 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
+  text-align: center;
 }
 
 .title {
-  font-size: 4rem;
+  font-size: 2rem;
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
   color: black;
-  text-align: center;
   margin-bottom: 1rem;
 }
 
 .custom-button {
-  padding: 1rem 2rem;
-  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
   border: 2px solid #f0c040;
   background-color: transparent;
   color: black;
   cursor: pointer;
   border-radius: 9999px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.custom-button:hover {
+  background-color: #f0c040;
+  color: white;
+  transform: translateY(-3px);
+}
+
+.custom-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 5px #666;
 }
 
 .news-section, .community-section, .download-section {
-  padding: 3rem 0;
+  padding: 3rem 1rem;
 }
 
 .container {
@@ -156,13 +169,13 @@ export default {
 }
 
 .section-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
   text-align: center;
 }
 
 .news-container {
-  max-width: 50rem;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -177,7 +190,7 @@ export default {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.news-header {
+.news-header, .news-footer {
   padding: 1rem;
   background-color: #323232;
   border: 1px solid #3f3f3f;
@@ -187,16 +200,9 @@ export default {
   padding: 1.5rem;
 }
 
-.news-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #323232;
-  border-top: 1px solid #3f3f3f;
-}
-
 .divider {
   border-top: 2px solid #3f3f3f;
-  margin: 2rem;
+  margin: 2rem 0;
 }
 
 .buttons-container {
@@ -204,21 +210,28 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  width: 100%;
 }
 
 .button-row {
   display: flex;
   gap: 1rem;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .community-button, .download-button {
-  width: 8rem;
-  padding: 0.5rem;
-  font-size: 1.5rem;
+  padding: 1rem 1rem;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 10rem;
 }
-
+  
 .community-button.discord {
   background-color: #7289da;
 }
@@ -247,20 +260,46 @@ export default {
   background-color: #f68b1e;
 }
 
-.custom-button:hover {
-  background-color: #f0c040;
-}
-.custom-button:hover,
-.community-button:hover,
-.download-button:hover {
-  color: white; /* Cambia el color del texto al pasar el ratón */
-  transform: translateY(-3px); /* Mueve el botón ligeramente hacia arriba */
+.community-button:hover, .download-button:hover {
+  color: white;
+  transform: translateY(-3px);
 }
 
-.custom-button:active,
-.community-button:active,
-.download-button:active {
-  transform: translateY(2px); /* Mueve el botón hacia abajo al hacer clic */
-  box-shadow: 0 5px #666; /* Añade una sombra para dar un efecto de presionado */
+.community-button:active, .download-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 5px #666;
 }
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+
+  .custom-button {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+  }
+
+  .community-button, .download-button {
+    font-size: 1.25rem;
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 4rem;
+  }
+
+  .custom-button {
+    font-size: 2rem;
+    padding: 1.5rem 3rem;
+  }
+
+  .community-button, .download-button {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+  }
+}
+
 </style>

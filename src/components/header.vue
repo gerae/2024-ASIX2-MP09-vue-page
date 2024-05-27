@@ -1,7 +1,7 @@
 <template>
       <div>
         <div class="header-container">
-          <Menubar :model="items" class="p-menubar">
+          <Menubar :model="items" class="p-menubar"> <!-- Component MenuBar de PrimeVue -->
             <template #item="{ item, props, hasSubmenu }">
               <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
                 <a ripple :href="href" v-bind="props.action" @click="navigate" class="nav-link">
@@ -26,7 +26,7 @@
   
   const router = useRouter();
   
-  // Rutas a las diferentes páginas
+  // Ruta a les pagines
   const items = ref([
     { label: 'Home', route: '/' },
     { label: 'Clasificación', route: '/users-table' },
@@ -49,18 +49,15 @@
     left: 0;
     width: 100%;
     height: 72px;
-    z-index: 1000; /* Asegura que el header esté por encima del contenido */
+    z-index: 1000;
     border-radius: 0;
-    background-color: rgba(255, 0, 0, 0.144);
+    border-color: rgb(160, 160, 160)
   }
   
-  /* Estilos del contenedor del header */
   .header-container {
-    align-items: center; /* Para alinear verticalmente */
-    padding: 0; /* Sin relleno */
+    align-items: center;
+    padding: 0;
     border-radius: 0;
   }
   
-  /* Estilos para los enlaces del menú */
   </style>
-  
